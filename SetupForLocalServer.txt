@@ -1,0 +1,20 @@
+https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-nodejs
+
+1. Complete the prerequisites from the website above to get node and other needed software on computer, not sure how much of the database ODBC driver or SQLCMD you'll
+        actually need. (might be worth checking if you can do it without it. If you were to need one of them though, I'd imagine it'd be the
+        ODBC driver rather than the SQLCMD so it might be worth adding the driver if it doesn't work in the first place without it and testing
+        it again without the SQLCMD thingy)
+
+2. Follow the rest of the steps (you should already have the database and it's firewall set up to allow your connection, you may need to give
+        it your new ip address)
+
+3. Follow the instructions to build a node project, before you create the first file for it, take a look at the file structure, you should have a
+        node_modules folder like the one in this folder
+
+4. Copy everything (except the node_modules folder, you won't actually need the backup folder either so you can leave that as well if you want)
+        from this folder into the folder which you created the node project in, it should now look very similar to this folder.
+
+5. Now once you have a command line terminal located in this folder, run the command node server.js (it should throw out some messages saying
+        it's connected to the database)
+
+6. Go to the browser and type the url "http://localhost:8080/" in. This should give you the website.
