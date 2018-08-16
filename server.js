@@ -131,7 +131,7 @@ http.createServer(function (request, response) {
 
 
 
-}).listen(8080);
+}).listen(process.env.PORT || 1337);
 
 // Create connection to database
 var config = {
