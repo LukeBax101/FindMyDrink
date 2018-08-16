@@ -56,6 +56,7 @@ var mixerCounter = 0;
 
 
 
+
 const button = document.getElementById('findButton');
 button.addEventListener('click', function(e) {
 	var xhttp = new XMLHttpRequest();
@@ -64,89 +65,123 @@ button.addEventListener('click', function(e) {
   	if (this.readyState == 4 && this.status == 200) {
 
 
-
-			var h2Full = document.createElement('h2');
-			h2Full.appendChild(document.createTextNode("Drinks you can complete:"));
-
-			var h2Partial = document.createElement('h2');
-
-			h2Partial.appendChild(document.createTextNode("Drinks you just have the alcohol for:"));
+			document.getElementById('partialReturnData').innerHTML = '';
+			document.getElementById('fullReturnData').innerHTML = '';
 
 
-			document.getElementById('fullReturnData').appendChild(h2Full);
-			document.getElementById('partialReturnData').appendChild(h2Partial);
 
 
 			var data = eval('(' + this.responseText + ')');
-			for (var con=0;con<data.full.length;con++)
-			{
-				var x = document.createElement('div');
-				x.className = 'fullDrink';
-				var y = document.createElement('h3');
-				y.appendChild(document.createTextNode(data.full[con].drink.name));
-				x.appendChild(y);
 
-				var breakEl = document.createElement('br');
-				x.appendChild(breakEl);
-
-				var a = document.createElement('img');
-				a.src = data.full[con].drink.picLink;
-				x.appendChild(a);
+			if (data.full.length == 0) {
+				console.log("Nothing to show in full drinks");
+				var emptyMessage = document.createElement('p');
+				emptyMessage.setAttribute('id',"emptyMessage");
 
 
-				var breakEl2 = document.createElement('br');
-				x.appendChild(breakEl2);
-
-
-				var link = document.createElement('a');
-    					link.setAttribute('href', data.full[con].drink.recipeLink);
-				var button = document.createElement('button');
-				button.appendChild(document.createTextNode(data.full[con].drink.name + ' Recipe'));
-
-   						link.appendChild(button);
+				if (data.partial.length == 0) {
+					emptyMessage.appendChild(document.createTextNode("You can't complete any drinks fully or partially with those ingredients."));
+				} else {
+					emptyMessage.appendChild(document.createTextNode("You can't complete any drinks fully with those ingredients, see below for drinks you can make partially with the given alcohols."));
+				}
 
 
 
-				x.appendChild(link);
+				document.getElementById('fullReturnData').appendChild(emptyMessage);
+			} else {
+
+				var h2Full = document.createElement('h2');
+				h2Full.appendChild(document.createTextNode("Drinks you can complete:"));
+				h2Full.setAttribute('id',"fullHeader");
+
+				document.getElementById('fullReturnData').appendChild(h2Full);
+
+
+				for (var con=0;con<data.full.length;con++)
+				{
+					var x = document.createElement('div');
+					x.className = 'fullDrink';
+					var y = document.createElement('h3');
+					y.appendChild(document.createTextNode(data.full[con].drink.name));
+					x.appendChild(y);
+
+					var breakEl = document.createElement('br');
+					x.appendChild(breakEl);
+
+					var a = document.createElement('img');
+					a.src = data.full[con].drink.picLink;
+					x.appendChild(a);
+
+
+					var breakEl2 = document.createElement('br');
+					x.appendChild(breakEl2);
+
+
+					var link = document.createElement('a');
+	    					link.setAttribute('href', data.full[con].drink.recipeLink);
+					var button = document.createElement('button');
+					button.appendChild(document.createTextNode(data.full[con].drink.name + ' Recipe'));
+
+	   						link.appendChild(button);
+
+
+
+					x.appendChild(link);
 
 
 
 
-				document.getElementById('fullReturnData').appendChild(x);
+					document.getElementById('fullReturnData').appendChild(x);
+				}
 			}
 
-			for (var con2=0;con2<data.partial.length;con2++)
-			{
-				var x = document.createElement('div');
-				x.className = 'partialDrink';
-				var y = document.createElement('h3');
-				y.appendChild(document.createTextNode(data.partial[con2].drink.name));
-				x.appendChild(y);
+
+			if (data.partial.length == 0) {
+				console.log("Nothing to show in partial drinks");
+			} else {
+
+				var h2Partial = document.createElement('h2');
+
+				h2Partial.appendChild(document.createTextNode("Drinks you just have the alcohol for:"));
+				h2Partial.setAttribute('id',"partialHeader");
 
 
-				var breakEl = document.createElement('br');
-				x.appendChild(breakEl);
-
-				var a = document.createElement('img');
-				a.src = data.partial[con2].drink.picLink;
-				x.appendChild(a);
+				document.getElementById('partialReturnData').appendChild(h2Partial);
 
 
-				var breakEl2 = document.createElement('br');
-				x.appendChild(breakEl2);
-
-				var link = document.createElement('a');
-    					link.setAttribute('href', data.partial[con2].drink.recipeLink);
-				var button = document.createElement('button');
-				button.appendChild(document.createTextNode(data.partial[con2].drink.name + ' Recipe'));
-
-   						link.appendChild(button);
+				for (var con2=0;con2<data.partial.length;con2++)
+				{
+					var x = document.createElement('div');
+					x.className = 'partialDrink';
+					var y = document.createElement('h3');
+					y.appendChild(document.createTextNode(data.partial[con2].drink.name));
+					x.appendChild(y);
 
 
-				x.appendChild(link);
+					var breakEl = document.createElement('br');
+					x.appendChild(breakEl);
+
+					var a = document.createElement('img');
+					a.src = data.partial[con2].drink.picLink;
+					x.appendChild(a);
 
 
-				document.getElementById('partialReturnData').appendChild(x);
+					var breakEl2 = document.createElement('br');
+					x.appendChild(breakEl2);
+
+					var link = document.createElement('a');
+	    					link.setAttribute('href', data.partial[con2].drink.recipeLink);
+					var button = document.createElement('button');
+					button.appendChild(document.createTextNode(data.partial[con2].drink.name + ' Recipe'));
+
+	   						link.appendChild(button);
+
+
+					x.appendChild(link);
+
+
+					document.getElementById('partialReturnData').appendChild(x);
+				}
 			}
 
 
