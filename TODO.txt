@@ -18,5 +18,4 @@ General:
   Check that multiple simultaneous accesses don't break it.
   Add in all the error checking
   Radio Selection??
-  Favcon icon
-  
+  Update favicon
