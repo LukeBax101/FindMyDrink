@@ -1,8 +1,6 @@
 HTML:
 
   Choice to remove a specific selection field
-  If no drinks completed or partially satisfied then say
-  Multiple requests makes multiple drinks panels, solve
 
 CSS:
   Make everything look fancy
@@ -13,12 +11,12 @@ Server:
 Client:
   Make so only one of each type of alcohol can be selected
   Choice to remove a specific selection field
-  If no drinks completed or partially satisfied then say
-  Multiple requests makes multiple drinks panels, solve
 
 General:
   Add comments to everything and tidy up code
   Make sure database is populated correctly and with links
-  Find a way to host the server and aux files on a website
   Check that multiple simultaneous accesses don't break it.
   Add in all the error checking
+  Radio Selection??
+  Favcon icon
+  

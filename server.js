@@ -36,7 +36,12 @@ http.createServer(function (request, response) {
     					response.end();
 	  			});
 
-
+    } else if (request.url == "/favicon.ico") {
+      fs.readFile('favicon.ico', function(err, data) {
+    					response.writeHead(200, {'Content-Type': 'image/x-icon'});
+    					response.write(data);
+    					response.end();
+	  			});
 		} else {
 			console.log(request.url);
     			var bodyStr = Buffer.concat(body).toString();
