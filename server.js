@@ -43,7 +43,7 @@ http.createServer(function (request, response) {
     					response.end();
 	  			});
 		} else {
-			console.log(request.url);
+			//console.log(request.url);
     			var bodyStr = Buffer.concat(body).toString();
 
 			if (bodyStr == "") {

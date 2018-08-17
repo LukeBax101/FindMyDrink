@@ -1,7 +1,4 @@
 
-document.getElementById('removeAlcohol').style.visibility = 'hidden';
-document.getElementById('removeMixer').style.visibility = 'hidden';
-
 var alcohols = {};
 var mixers = {};
 
@@ -27,10 +24,23 @@ xhttpDrinks.onreadystatechange = function() {
 				return acc
 			}, {})
 
+		var alcoholForm = document.getElementById("alcoholForm");
 
-		var alcoholEntry1 = document.getElementById("alcoholEntry1")
 		for(index in alcohols) {
-					alcoholEntry1.options[alcoholEntry1.options.length] = new Option(alcohols[index], index);
+			var pair = alcohols[index];
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = "alcohol";
+      checkbox.value = index;
+      alcoholForm.appendChild(checkbox);
+
+      var label = document.createElement('label')
+      label.htmlFor = pair;
+      label.appendChild(document.createTextNode(pair));
+
+      alcoholForm.appendChild(label);
+      alcoholForm.appendChild(document.createElement("br"));
+
 		}
 
 		mixers = mixerArray.reduce((acc, elem) => {
@@ -39,8 +49,28 @@ xhttpDrinks.onreadystatechange = function() {
 			}, {})
 
 
-   			}
-		};
+		var mixerForm = document.getElementById("mixerForm");
+
+		for(index in mixers) {
+
+			var pair2 = mixers[index];
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = "mixer";
+      checkbox.value = index;
+      mixerForm.appendChild(checkbox);
+
+      var label = document.createElement('label')
+      label.htmlFor = pair2;
+      label.appendChild(document.createTextNode(pair2));
+
+      mixerForm.appendChild(label);
+      mixerForm.appendChild(document.createElement("br"));
+		}
+
+
+   	}
+};
 
 
 xhttpDrinks.open("POST", "", true);
@@ -49,11 +79,6 @@ var drinkRequest = "RequestDrinks";
 
 
 xhttpDrinks.send(drinkRequest);
-
-var alcoholCounter = 1;
-
-var mixerCounter = 0;
-
 
 
 
@@ -170,11 +195,11 @@ button.addEventListener('click', function(e) {
 					x.appendChild(breakEl2);
 
 					var link = document.createElement('a');
-	    					link.setAttribute('href', data.partial[con2].drink.recipeLink);
+	    		link.setAttribute('href', data.partial[con2].drink.recipeLink);
 					var button = document.createElement('button');
 					button.appendChild(document.createTextNode(data.partial[con2].drink.name + ' Recipe'));
 
-	   						link.appendChild(button);
+	   			link.appendChild(button);
 
 
 					x.appendChild(link);
@@ -186,28 +211,41 @@ button.addEventListener('click', function(e) {
 
 
 
-   				}
-			};
+   	}
+	};
 
 
 	xhttp.open("POST", "", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	var data = "" + alcoholCounter + " " + mixerCounter + " ";
-	var i;
-	for (i = 0; i < alcoholCounter; i++) {
-	 	data = data + document.getElementById("alcoholEntry"+(i+1)).value + " ";
-	}
 
-	var j;
-	for (j = 0; j < mixerCounter; j++) {
-	 	data = data + document.getElementById("mixerEntry"+(j+1)).value + " ";
-	}
+	var alCheckboxes = document.getElementsByName("alcohol");
+	var numAlcohols = 0;
+	var data = "";
 
+  for (var i=0; i<alCheckboxes.length; i++) {
+		if (alCheckboxes[i].checked) {
+			numAlcohols++;
+			data = data + alCheckboxes[i].value + " ";
+		}
+  }
 
+	var mixCheckboxes = document.getElementsByName("mixer");
+	var numMixers = 0;
+
+  for (var j=0; j<mixCheckboxes.length; j++) {
+		if (mixCheckboxes[j].checked) {
+			numMixers++;
+			data = data + mixCheckboxes[j].value + " ";
+		}
+  }
+
+	data = numAlcohols + " " + numMixers + " " + data;
+
+	//console.log(data);
 	xhttp.send(data);
 });
 
-
+/*
 const addAlButton = document.getElementById('addAlcohol');
 addAlButton.addEventListener('click', function(e) {
 	alcoholCounter = alcoholCounter +1;
@@ -330,3 +368,4 @@ removeMixButton.addEventListener('click', function(e) {
 		}
 	}
 });
+*/
