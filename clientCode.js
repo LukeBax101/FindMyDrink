@@ -55,6 +55,7 @@ xhttpDrinks.onreadystatechange = function() {
 
 			var pair2 = mixers[index];
       var checkbox = document.createElement("input");
+			checkbox.setAttribute("class","five");
       checkbox.type = "checkbox";
       checkbox.name = "mixer";
       checkbox.value = index;

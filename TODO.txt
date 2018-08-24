@@ -1,6 +1,5 @@
 HTML:
 
-  Choice to remove a specific selection field
 
 CSS:
   Make everything look fancy
@@ -9,13 +8,9 @@ Server:
 
 
 Client:
-  Make so only one of each type of alcohol can be selected
-  Choice to remove a specific selection field
+
 
 General:
   Add comments to everything and tidy up code
   Make sure database is populated correctly and with links
-  Check that multiple simultaneous accesses don't break it.
   Add in all the error checking
-  Radio Selection??
-  Update favicon
