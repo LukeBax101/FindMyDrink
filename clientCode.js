@@ -122,7 +122,10 @@ button.addEventListener('click', function(e) {
 
 				document.getElementById('fullReturnData').appendChild(h2Full);
 
+				var wheel = document.getElementById('wheel');
+				var source = "https://wheeldecide.com/e.php?";
 
+				var num = 1;
 				for (var con=0;con<data.full.length;con++)
 				{
 					var x = document.createElement('div');
@@ -158,7 +161,12 @@ button.addEventListener('click', function(e) {
 
 
 					document.getElementById('fullReturnData').appendChild(x);
+					var textName = data.full[con].drink.name.replace(/ /g,"+");
+					source = source + "c" + num + "=" + textName;
+					num++;
 				}
+				source = source + "&time=5";
+				wheel.setAttribute("src","https://wheeldecide.com/e.php?c1=Stay+in&c2=Go+out&time=5")
 			}
 
 
