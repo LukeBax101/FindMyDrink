@@ -166,7 +166,7 @@ button.addEventListener('click', function(e) {
 					num++;
 				}
 				source = source + "&time=5";
-				wheel.setAttribute("src","https://wheeldecide.com/e.php?c1=Stay+in&c2=Go+out&time=5")
+				wheel.setAttribute("src",source)
 			}
 
 
